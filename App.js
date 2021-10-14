@@ -2,9 +2,11 @@ import React, { useState,useEffect } from 'react';
 import * as Font from "expo-font"
 import { 
   StyleSheet, 
-  Image
+  Image,
+  View
 } from 'react-native';
 import Header from './components/Header/Header';
+import Formulario from './components/Formulario/Formulario';
 
 export default function App() {
   // forma de importar fuente externa. 
@@ -27,6 +29,9 @@ export default function App() {
         style={styles.imagen}
         source={require('./assets/img/cryptomonedas.png')}
       />
+      <View style={styles.contenido}>
+        <Formulario/>
+      </View>
     </>
   );
 }
@@ -36,5 +41,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height:150,
     marginHorizontal:"2.5%"
+  },
+  contenido: {
+    marginHorizontal:"2.5%"
+
   }
 });
