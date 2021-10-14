@@ -2,10 +2,7 @@ import React, { useState,useEffect } from 'react';
 import * as Font from "expo-font"
 import { 
   StyleSheet, 
-  Text, 
-  View,
-  StatusBar,
-  SafeAreaView
+  Image
 } from 'react-native';
 import Header from './components/Header/Header';
 
@@ -25,15 +22,19 @@ export default function App() {
   }
   return (
     <>
-    <Text style={styles.prueba}>Prueba de Lato Black</Text>
       <Header/>
+      <Image 
+        style={styles.imagen}
+        source={require('./assets/img/cryptomonedas.png')}
+      />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  prueba: {
-    fontFamily:"Lato-Black"
+  imagen:{
+    width: "100%",
+    height:150,
+    marginHorizontal:"2.5%"
   }
-  
 });
