@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import { StyleSheet, Image, View, ScrollView } from "react-native";
+import { StyleSheet, Image, View, ScrollView, ActivityIndicator } from "react-native";
 import Header from "./components/Header/Header";
 import Formulario from "./components/Formulario/Formulario";
 import axios from "axios";
@@ -13,6 +13,7 @@ export default function App() {
   const [criptomoneda, setCriptomoneda] = useState("");
   const [consultarAPI, setConsultarAPI] = useState(false);
   const [resultado, setResultado] = useState({});
+  const [cargando, setCargando] = useState(false)
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
@@ -33,12 +34,17 @@ export default function App() {
         const resultado = await axios.get(url);
         //guardo el resultado que con las monidas que necesito.
         setResultado(resultado.data.DISPLAY[criptomoneda][moneda]);
-        console.log(resultado.data.DISPLAY[criptomoneda][moneda]);
-        setConsultarAPI(false);
+        //Ocultar spinner y mostrar resultado
+        setCargando(true)
+        setTimeout(() =>{
+          setConsultarAPI(false);
+          setCargando(false)
+        },3000)
       }
     };
     cotizarCriptomoneda();
   }, [consultarAPI]);
+  const componente = cargando ? <ActivityIndicator size="large" color="#5E49E2"/> : <Cotizacion resultado={resultado} />;
   return (
     <>
       <ScrollView>
@@ -56,8 +62,8 @@ export default function App() {
             setConsultarAPI={setConsultarAPI}
           />
         </View>
-        <View>
-          <Cotizacion resultado={resultado} />
+        <View style={{marginTop:40}}>
+          {componente}
         </View>
       </ScrollView>
     </>
