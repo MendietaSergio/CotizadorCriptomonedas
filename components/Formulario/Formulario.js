@@ -25,7 +25,6 @@ const Formulario = ({
             return;
         }
         //pasa la validacion
-        console.log("cotizando...");
         setConsultarAPI(true)
 
     }
@@ -43,7 +42,6 @@ const Formulario = ({
             const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
             const resultado = await axios.get(url);
             setCriptomonedas(resultado.data.Data);
-            console.log("resultado: ",resultado.data.Data);
         }
         consultarAPI()
     },[])
@@ -68,7 +66,7 @@ const Formulario = ({
                 itemStyle={{height:120}}
             >
                 {criptomonedas.map((cripto) => (
-                    <Picker.Item key={cripto.Id} label={cripto.CoinInfo.FullName} value={cripto.CoinInfo.Name}/>
+                    <Picker.Item key={cripto.CoinInfo.Id} label={cripto.CoinInfo.FullName} value={cripto.CoinInfo.Name}/>
                 ))}
             </Picker>
             <TouchableHighlight 
